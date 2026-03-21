@@ -57,14 +57,14 @@ const THEMES = [
 // ============================================================
 const DATA = {
     profile: {
-        name: "Justanother_game",
+        name: "Youngblock3k",
         age: 15,
         role: "Game / Backend Developer",
-        location: "Oslo, Norway",
-        email: "just_anothergame04@gmail.com",
+        location: "Oslo,",
+        email: "youngblock3k@gmail.com",
         bio: "Developer focused on Minecraft servers, scripting, automation, and game systems.",
         pfp: "pfp.png",
-        discordLink: "https://discord.com/users/justanother_game"
+        discordLink: "https://discord.com/users/969189377714577420"
     },
 
     skills: [
