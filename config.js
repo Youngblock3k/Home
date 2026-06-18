@@ -88,20 +88,20 @@ const DATA = {
             discord: "https://discord.gg/Tnbhdjs23q"
         },
         {
-            title: "Dirtbox",
+            title: "Petlify",
             description: "Multi-mode Minecraft network with advanced server infrastructure and gameplay systems.",
-            tags: ["Network", "Survival", "Custom Systems"],
+            tags: ["Grind", "Simulator", "Custom Systems"],
             theme: "purple",
-            image: "https://cdn.discordapp.com/icons/1464667156955402499/315a3a4b3d018fa5457def07cfdbff48.png?size=4096",
-            discord: "https://discord.gg/MtCfgK9mHB"
+            image: "https://cdn.discordapp.com/icons/1464667156955402499/0331855e844441156865ee8c60d4f747.png?size=4096",
+            discord: "https://discord.gg/uJtxyAfDsB"
         },
         {
-            title: "Gamestop",
+            title: "Game Studios",
             description: "Discord Bot Store with automation, moderation, and smart features for community management.",
-            tags: ["Discord", "Automation", "Store"],
+            tags: ["Discord", "Automation", "Store", "Java/Skript"],
             theme: "blue",
-            image: "https://cdn.discordapp.com/icons/1469641813425131674/880cab82b517d5676dfbd84c2131eb52.png?size=4096",
-            discord: "https://discord.gg/EPTu4uW3z4"
+            image: "https://cdn.discordapp.com/icons/1469641813425131674/2dae673361d2b8f7afa5926287e32861.png?size=4096",
+            discord: "https://discord.gg/BaCYXP3Aek"
         }
     ],
 
