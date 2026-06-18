@@ -132,7 +132,9 @@ document.addEventListener("DOMContentLoaded", () => {
     function applyTheme(themeId) {
         const theme = THEMES.find(t => t.id === themeId);
         if (!theme) return;
-        document.body.style.backgroundImage = `url('${theme.background}')`;
+        // Update the CSS variable — body::before reads this to swap the GIF
+        // This works on desktop AND iOS Safari (no background-attachment:fixed bug)
+        document.documentElement.style.setProperty("--bg-image", `url('${theme.background}')`);
         document.querySelector(".overlay").style.background = theme.overlay;
         document.documentElement.style.setProperty("--accent",  theme.accent);
         document.documentElement.style.setProperty("--accent2", theme.accent2);
