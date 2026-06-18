@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>Portfolio | Justanother_game</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <!-- ╔══════════════════════════════════════════════════════╗
+         ║  PHONE OVERRIDES ONLY — nothing in HTML was touched  ║
+         ╚══════════════════════════════════════════════════════╝ -->
+    <style>
+    @media screen and (max-width: 768px) {
+
+        /* ── Safe-area / root ─────────────────────────────── */
+        :root {
+            --safe-top: env(safe-area-inset-top, 0px);
+            --safe-bottom: env(safe-area-inset-bottom, 0px);
+        }
+
+        * {
+            -webkit-tap-highlight-color: transparent;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        /* ── Logo top-left ────────────────────────────────── */
+        .logo-container {
+            top: calc(var(--safe-top) + 10px);
+            left: 12px;
+            z-index: 1001;
+        }
+
+        .logo-btn {
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 17px;
+        }
+
+        /* ── Top-right controls ───────────────────────────── */
+        .top-right-controls {
+            position: fixed;
+            top: calc(var(--safe-top) + 10px);
+            right: 12px;
+            z-index: 1001;
+            display: flex;
+            flex-direction: row;
+            gap: 8px;
+            align-items: center;
+        }
+
+        /* Shrink the toggle buttons to icon-only on small screens */
+        .music-toggle-btn,
+        .theme-toggle-btn {
+            padding: 0 12px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border-radius: 21px;
+            font-size: 13px;
+            white-space: nowrap;
+            min-width: 0;
+        }
+
+        /* Hide the text labels on very small screens */
+        @media screen and (max-width: 390px) {
+            #musicLabel,
+            #themeLabel {
+                display: none;
+            }
+        }
+
+        /* Dropdowns: full-width from bottom instead of top-right */
+        .music-dropdown,
+        .theme-dropdown {
+            position: fixed !important;
+            top: auto !important;
+            bottom: calc(var(--safe-bottom) + 70px) !important;
+            left: 12px !important;
+            right: 12px !important;
+            width: auto !important;
+            max-height: 60vh;
+            overflow-y: auto;
+            border-radius: 16px;
+            z-index: 2000;
+        }
+
+        /* ── Navbar → bottom tab bar ──────────────────────── */
+        .navbar {
+            position: fixed !important;
+            bottom: 0 !important;
+            top: auto !important;
+            left: 0;
+            right: 0;
+            width: 100%;
+            display: flex !important;
+            flex-direction: row !important;
+            justify-content: space-around !important;
+            align-items: center !important;
+            padding: 6px 4px calc(var(--safe-bottom) + 6px) !important;
+            gap: 0 !important;
+            z-index: 1000;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            border-radius: 0 !important;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            height: auto !important;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .navbar::-webkit-scrollbar { display: none; }
+
+        .navbar a {
+            flex: 1;
+            min-width: 44px;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            font-size: 9px !important;
+            padding: 4px 2px !important;
+            gap: 3px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        /* Add icons to nav links via pseudo-elements */
+        .navbar a[href="#home"]::before     { content: "\f015"; font-family: "Font Awesome 6 Free"; font-weight: 900; font-size: 18px; display: block; }
+        .navbar a[href="#about"]::before    { content: "\f007"; font-family: "Font Awesome 6 Free"; font-weight: 900; font-size: 18px; display: block; }
+        .navbar a[href="#skills"]::before   { content: "\f121"; font-family: "Font Awesome 6 Free"; font-weight: 900; font-size: 18px; display: block; }
+        .navbar a[href="#projects"]::before { content: "\f07b"; font-family: "Font Awesome 6 Free"; font-weight: 900; font-size: 18px; display: block; }
+        .navbar a[href="#work"]::before     { content: "\f0b1"; font-family: "Font Awesome 6 Free"; font-weight: 900; font-size: 18px; display: block; }
+        .navbar a[href="#store"]::before    { content: "\f07a"; font-family: "Font Awesome 6 Free"; font-weight: 900; font-size: 18px; display: block; }
+        .navbar a[href="#contact"]::before  { content: "\f0e0"; font-family: "Font Awesome 6 Free"; font-weight: 900; font-size: 18px; display: block; }
+
+        /* ── Main container spacing ───────────────────────── */
+        .container {
+            padding-top: calc(var(--safe-top) + 64px) !important;
+            padding-bottom: calc(var(--safe-bottom) + 80px) !important;
+            padding-left: 14px !important;
+            padding-right: 14px !important;
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+
+        /* ── Sections ─────────────────────────────────────── */
+        .section {
+            padding: 28px 0 !important;
+        }
+
+        /* ── Hero card ────────────────────────────────────── */
+        .hero-card {
+            text-align: center !important;
+            padding: 24px 16px !important;
+        }
+
+        .hero-card .title,
+        .hero-card h1 {
+            font-size: clamp(22px, 6vw, 32px) !important;
+        }
+
+        .cta-buttons {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 10px !important;
+            width: 100% !important;
+        }
+
+        .cta-buttons .btn {
+            width: 100% !important;
+            justify-content: center !important;
+            padding: 14px 20px !important;
+            font-size: 15px !important;
+            min-height: 48px !important;
+        }
+
+        /* ── Skills grid → 2 columns ──────────────────────── */
+        .skills-grid {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 10px !important;
+        }
+
+        .skill-item {
+            padding: 14px 10px !important;
+        }
+
+        .skill-item i {
+            font-size: 26px !important;
+        }
+
+        .skill-item h3 {
+            font-size: 12px !important;
+        }
+
+        .skill-item p {
+            font-size: 11px !important;
+        }
+
+        /* ── Projects grid → single column ───────────────── */
+        .projects-grid {
+            grid-template-columns: 1fr !important;
+            gap: 14px !important;
+        }
+
+        /* ── Work tabs → scrollable row ───────────────────── */
+        .work-tabs {
+            display: flex !important;
+            flex-direction: row !important;
+            overflow-x: auto !important;
+            -webkit-overflow-scrolling: touch !important;
+            scrollbar-width: none !important;
+            gap: 8px !important;
+            padding-bottom: 4px !important;
+            flex-wrap: nowrap !important;
+        }
+        .work-tabs::-webkit-scrollbar { display: none; }
+
+        .work-tab-btn {
+            flex-shrink: 0 !important;
+            padding: 9px 16px !important;
+            font-size: 13px !important;
+            white-space: nowrap !important;
+        }
+
+        /* ── Store packages → single column ──────────────── */
+        .store-packages {
+            grid-template-columns: 1fr !important;
+            flex-direction: column !important;
+            gap: 14px !important;
+        }
+
+        /* ── Placeholder grid → 2 col ─────────────────────── */
+        .placeholder-grid {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 10px !important;
+        }
+
+        /* ── Cards ─────────────────────────────────────────── */
+        .card {
+            padding: 16px !important;
+            border-radius: 14px !important;
+        }
+
+        /* ── Contact ────────────────────────────────────────── */
+        .contact-content {
+            flex-direction: column !important;
+            gap: 12px !important;
+        }
+
+        .contact-item {
+            flex-direction: row !important;
+            align-items: center !important;
+            gap: 12px !important;
+        }
+
+        /* ── About content ──────────────────────────────────── */
+        .about-content p {
+            flex-direction: row !important;
+            gap: 6px !important;
+            font-size: 14px !important;
+        }
+
+        /* ── Avatar ─────────────────────────────────────────── */
+        .avatar-wrap {
+            width: 80px !important;
+            height: 80px !important;
+        }
+
+        /* ── General touch targets ───────────────────────────── */
+        a, button, .btn, .work-tab-btn, .music-ctrl-btn, .pkg-btn {
+            min-height: 44px;
+        }
+
+        /* ── Scrollbar hide ──────────────────────────────────── */
+        ::-webkit-scrollbar { display: none; }
+        * { scrollbar-width: none; }
+
+        /* ── Music vol slider thumb (touch-friendly) ─────────── */
+        .music-vol-slider::-webkit-slider-thumb {
+            width: 22px !important;
+            height: 22px !important;
+        }
+    }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+
+    <!-- Logo/Home Button Top Left -->
+    <div class="logo-container">
+        <a href="#home" class="logo-btn" title="Back to Home">
+            <i class="fas fa-home"></i>
+        </a>
+    </div>
+
+    <!-- Top Right Controls -->
+    <div class="top-right-controls">
+
+        <!-- Music Player -->
+        <div class="music-container">
+            <button class="music-toggle-btn" id="musicToggleBtn" title="Music Player">
+                <i class="fas fa-music"></i>
+                <span id="musicLabel">Music</span>
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="music-dropdown" id="musicDropdown">
+
+                <!-- Now Playing -->
+                <div class="music-now-playing">
+                    <div class="music-icon-wrap"><i class="fas fa-music"></i></div>
+                    <div class="music-info">
+                        <span class="music-track-name" id="musicTrackName">No track loaded</span>
+                        <span class="music-track-status" id="musicTrackStatus">Stopped</span>
+                    </div>
+                </div>
+
+                <!-- Controls row: prev | play/pause | next -->
+                <div class="music-controls-row">
+                    <button class="music-ctrl-btn" id="musicPrev"><i class="fas fa-step-backward"></i></button>
+                    <button class="music-ctrl-btn music-ctrl-play" id="musicPlay"><i class="fas fa-play"></i></button>
+                    <button class="music-ctrl-btn" id="musicNext"><i class="fas fa-step-forward"></i></button>
+                </div>
+
+                <!-- Volume row -->
+                <div class="music-vol-row">
+                    <i class="fas fa-volume-down music-vol-icon"></i>
+                    <input type="range" id="musicVolume" class="music-vol-slider" min="0" max="100" value="60">
+                    <i class="fas fa-volume-up music-vol-icon"></i>
+                </div>
+
+                <!-- Playlist — same style as theme options -->
+                <div class="music-playlist-list" id="musicPlaylist">
+                    <!-- injected by JS -->
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Theme Switcher -->
+        <div class="theme-switcher-container">
+            <button class="theme-toggle-btn" id="themeToggleBtn" title="Change Theme">
+                <i class="fas fa-palette"></i>
+                <span id="themeLabel">Fox Theme</span>
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="theme-dropdown" id="themeDropdown">
+                <!-- injected by JS -->
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#work">Work</a>
+        <a href="#store">🛒 Store</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="container">
+
+        <!-- Home Section -->
+        <section id="home" class="section hero-section">
+            <div class="card hero-card">
+                <div class="avatar-container">
+                    <div class="avatar-wrap"></div>
+                </div>
+                <h1 class="title" id="name">Justanother_game</h1>
+                <p class="subtitle role" id="role">Game / Backend Developer</p>
+                <p class="subtitle location"><i class="fas fa-map-marker-alt"></i> <span id="location">Oslo, Norway</span></p>
+                <p class="bio" id="bio">Developer focused on Minecraft servers, scripting, automation, and game systems.</p>
+                <div class="cta-buttons">
+                    <a href="#projects" class="btn btn-primary">View My Work</a>
+                    <a href="#store" class="btn btn-store">🛒 Visit Store</a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <h2>About Me</h2>
+            <div class="card">
+                <div class="about-content">
+                    <p><strong>Age:</strong> 17 years old</p>
+                    <p><strong>Role:</strong> Game Developer & Backend Engineer</p>
+                    <p><strong>Location:</strong> Oslo, Norway</p>
+                    <p><strong>Specialization:</strong> Minecraft server development, automation systems, and Discord bot creation</p>
+                    <p>I'm passionate about building immersive gaming experiences and robust backend systems. With experience in multiple programming languages and frameworks, I focus on creating scalable solutions for complex game mechanics and server infrastructure.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section">
+            <h2>Skills & Technologies</h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <i class="fab fa-java"></i>
+                    <h3>Java</h3>
+                    <p>Server development & Minecraft plugins</p>
+                </div>
+                <div class="skill-item">
+                    <i class="fas fa-scroll"></i>
+                    <h3>Skript</h3>
+                    <p>Custom game mechanics & systems</p>
+                </div>
+                <div class="skill-item">
+                    <i class="fab fa-js-square"></i>
+                    <h3>JavaScript</h3>
+                    <p>Web development & automation</p>
+                </div>
+                <div class="skill-item">
+                    <i class="fab fa-html5"></i>
+                    <h3>HTML & CSS</h3>
+                    <p>Web design & UI/UX</p>
+                </div>
+                <div class="skill-item">
+                    <i class="fas fa-cube"></i>
+                    <h3>Minecraft Dev</h3>
+                    <p>Server networks & custom content</p>
+                </div>
+                <div class="skill-item">
+                    <i class="fab fa-discord"></i>
+                    <h3>Discord Bots</h3>
+                    <p>Automation & moderation tools</p>
+                </div>
+                <div class="skill-item">
+                    <i class="fas fa-robot"></i>
+                    <h3>Automation</h3>
+                    <p>Scripts & system integration</p>
+                </div>
+                <div class="skill-item">
+                    <i class="fas fa-cogs"></i>
+                    <h3>System Design</h3>
+                    <p>Architecture & optimization</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <h2>Featured Projects</h2>
+            <div class="projects-grid" id="projectsContainer">
+                <!-- populated by JS -->
+            </div>
+        </section>
+
+        <!-- Work Section -->
+        <section id="work" class="section">
+            <h2>My Work & Skripts</h2>
+            <div class="work-content">
+                <div class="work-tabs">
+                    <button class="work-tab-btn active" data-tab="skripts">Skripts</button>
+                    <button class="work-tab-btn" data-tab="screenshots">Screenshots</button>
+                    <button class="work-tab-btn" data-tab="videos">Featured Work</button>
+                </div>
+                <div class="work-panels">
+                    <div class="work-panel active" id="skripts-panel">
+                        <div class="card">
+                            <h3><i class="fas fa-scroll"></i> Skript Examples</h3>
+                            <p>Specialized in creating custom Minecraft game mechanics and systems using Skript:</p>
+                            <ul class="work-list">
+                                <li>Game Event Systems</li>
+                                <li>Custom Progression & Leveling</li>
+                                <li>Advanced PvP Mechanics</li>
+                                <li>Economy & Shop Systems</li>
+                                <li>Player Data Management</li>
+                                <li>Event Triggers & Automation</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="work-panel" id="screenshots-panel">
+                        <div class="card">
+                            <h3><i class="fas fa-images"></i> Project Screenshots</h3>
+                            <p>Visual showcase of server builds and custom systems:</p>
+                            <div class="placeholder-grid">
+                                <div class="placeholder-item"><i class="fas fa-image"></i><p>Culling Server Showcase</p></div>
+                                <div class="placeholder-item"><i class="fas fa-image"></i><p>Dirtbox Network</p></div>
+                                <div class="placeholder-item"><i class="fas fa-image"></i><p>Custom Game Modes</p></div>
+                                <div class="placeholder-item"><i class="fas fa-image"></i><p>Game UI Design</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="work-panel" id="videos-panel">
+                        <div class="card">
+                            <h3><i class="fas fa-video"></i> Featured Work</h3>
+                            <p>Highlights of major projects and custom systems:</p>
+                            <div class="featured-work">
+                                <div class="work-item">
+                                    <i class="fas fa-play-circle"></i>
+                                    <h4>Server Mechanics Demo</h4>
+                                    <p>Custom game systems in action</p>
+                                </div>
+                                <div class="work-item">
+                                    <i class="fas fa-play-circle"></i>
+                                    <h4>PvP Gameplay</h4>
+                                    <p>Advanced combat systems</p>
+                                </div>
+                                <div class="work-item">
+                                    <i class="fas fa-play-circle"></i>
+                                    <h4>Network Overview</h4>
+                                    <p>Multi-server infrastructure</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Store Section -->
+        <section id="store" class="section">
+            <h2>Skript Packages</h2>
+            <p class="store-intro">Professional Skript packages for every server size — from small testing environments to full custom gamemodes.</p>
+            <div class="store-packages" id="storePackages">
+                <!-- populated by JS -->
+            </div>
+            <div class="store-contact-banner">
+                <h3>Get in Touch</h3>
+                <p>Want a custom skript or package? Contact me via Discord:</p>
+                <a href="https://discord.com/users/justanother_game" target="_blank" class="btn btn-discord">
+                    <i class="fab fa-discord"></i> My Discord
+                </a>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <h2>Get In Touch</h2>
+            <div class="card contact-card">
+                <div class="contact-content">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email</h3>
+                            <a href="mailto:just_anothergame04@gmail.com">just_anothergame04@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Location</h3>
+                            <p>Oslo, Norway</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <p>Feel free to reach out for project collaborations or if you have any questions!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2026 Justanother_game. All rights reserved.</p>
+        </footer>
+
+    </div>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
