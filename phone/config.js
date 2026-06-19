@@ -113,7 +113,7 @@ const DATA = {
         {
             id: "basic",
             title: "Basic",
-            priceDisplay: "$54.99",
+            priceDisplay: "$4.99",
             description: "Essential skripts for small servers and testing environments.",
             features: [
                 "✓ Core utilities",
