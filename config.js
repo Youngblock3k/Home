@@ -1,13 +1,17 @@
 // ============================================================
-//  MUSIC TRACKS — Use .mp3 files (best browser support)
-//  Drop your .mp3 files in a "music/" folder next to the site.
+//  MUSIC TRACKS
+//  Put your .mp3 files inside a folder called:  music/
+//  (next to index.html — same folder your site lives in)
+//
+//  On phone: place files at  music/trackname.mp3
+//  The browser will load them from that relative path.
+//
 //  Example:
-//    { name: "Lofi Study", src: "music/lofi.mp3" },
+//    { name: "Lofi Study",   src: "music/lofi.mp3"   },
+//    { name: "Winter Vibes", src: "music/winter.mp3"  },
 // ============================================================
 const MUSIC_TRACKS = [
-    { name: "Lofi Study", src: "musics/lofi.mp3" },
-    // { name: "Winter Vibes", src: "music/winter.mp3" },
-    // { name: "Fox Theme",    src: "music/fox.mp3"    },
+    { name: "Lofi Study", src: "home/music/lofi.mp3" },
 ];
 
 
@@ -109,7 +113,7 @@ const DATA = {
         {
             id: "basic",
             title: "Basic",
-            priceDisplay: "$5.99",
+            priceDisplay: "$4.99",
             description: "Essential skripts for small servers and testing environments.",
             features: [
                 "✓ Core utilities",
@@ -144,4 +148,3 @@ const DATA = {
         }
     ]
 };
-
